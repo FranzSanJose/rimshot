@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIMSHOT</title>
+    <link rel="icon" href="logo.png" type="png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.4/jquery.rateyo.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .password-strength {
+            display: none;
+            margin-top: 4px;
+            border-radius: 5px;
+            transition: .3s;
+            text-align: center;
+        }
+        #profile-picture-preview {
+            width: 100px; /* Adjust the width as needed */
+            height: 100px; /* Adjust the height as needed */
+            display: block; /* Ensure it's a block element */
+            margin: auto; /* Center horizontally */
+        }
+        #signup {
+            padding: 1px 80px;
+            background-image: url(background.png);
+            height: 100vh;
+            background-size: cover;
+            background-position: top 25% right 0;
+            position: relative;
+        }
+
+        #signup::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+            z-index: 1; /* Ensure the pseudo-element is behind the background */
+        }
+
+        .signup-container {
+            position: relative; 
+            z-index: 1; 
+            max-width: 700px; /* Increased width for better form display */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Gap between form groups */
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+        }
+
+        #signup-btn {
+            width: 50%;
+            align-self: center;
+            padding: 10px;
+            background-color: #000; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            border: 2px solid black;
+        }
+
+        #signup-btn:hover {
+            background-color: white; /* Button hover color */
+            color: #000;
+            border: 2px solid black;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+
+        /* Navbar styling */
+        #header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+        }
+
+        #navbar {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #navbar li {
+            margin-right: 15px;
+        }
+
+        #navbar li:last-child {
+            margin-right: 0;
+        }
+
+        #navbar li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        #navbar li a:hover {
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        /* Hamburger menu */
+        .icon {
+            display: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            #navbar {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #333;
+            }
+
+            #navbar.active {
+                display: flex;
+                background-color: black
+            }
+
+            .icon {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            #navbar li {
+                margin-right: 0;
+                text-align: center;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <a><img src="logo.png" class="logo" alt="Logo"></a>
+        
+        <nav>
+            <ul id="navbar">
+                
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="signup">
+        <div class="signup-container clearfix">
+            <h2>Create an Account</h2>
+            <form id="signup-form" action="signup.php" method="POST" enctype="multipart/form-data" onsubmit="redirectToLogin(event)">
+                <div class="form-group">
+                    <label for="profile-picture">Upload Profile Picture:</label>
+                    <div>
+                        <img id="profile-picture-preview" src="#" alt="">
+                        <input type="file" id="profile-picture" name="profile-picture" accept="image/*" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                        <div id="email-error" class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" placeholder="Address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact No:</label>
+                        <input type="tel" id="contact" name="contact" placeholder="Contact No." value="09" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Password" required oninput="checkPasswordStrength()">
+                        <div id="password-strength" class="password-strength"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password:</label>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="signup-btn">Sign Up</button>
+                </div>
+            </form>
+            <div class="form-group">
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popup for successful signup -->
+    <div id="signup-success" class="popup">
+        <p>Signup successful!</p>
+    </div>
+    
+    <script src="signup.js"></script>
+    <script>
+        function redirectToLogin(event) {
+            event.preventDefault();
+            var form = event.target;
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    // Show popup for successful signup
+                    document.getElementById('signup-success').style.display = 'block';
+                    // Redirect after a short delay
+                    setTimeout(function() {
+                        window.location.href = 'login.html';
+                    }, 2000); // 2 seconds delay
+                } else {
+                    alert('There was an issue with your sign-up.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('There was an issue with your sign-up.');
+            });
+        }
+    </script>
+</body>
+</html>
