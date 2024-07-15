@@ -21,7 +21,7 @@ function renderCartItems() {
         return;
     } else {
         proceedButton.classList.remove('disabled');
-        proceedButton.href = 'checkout.html';
+        proceedButton.href = 'checkout.php';
     }
 
     cartItems.forEach(item => {
@@ -98,5 +98,5 @@ function checkoutClicked() {
     // Render empty cart
     renderCartItems();
     // Optionally, redirect to checkout.php
-    window.location.href = 'checkout.html';
+    window.location.href = 'checkout.php';
 }
