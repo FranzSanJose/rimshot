@@ -11,7 +11,7 @@ function confirmOrder(event) {
     const total = document.getElementById('total').value;
 
     // Ensure image data is included
-    fetch('checkout.html', {
+    fetch('checkout.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -33,7 +33,7 @@ function confirmOrder(event) {
                 window.location.href = 'home.html';
             });
         } else {
-            
+            alert('Order could not be processed. Please try again.');
         }
     })
     .catch(error => console.error('Error:', error));
