@@ -43,7 +43,7 @@ document.getElementById('add-to-cart-btn').addEventListener('click', function() 
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
         // Redirect to cart.php after adding the item to the cart
-        window.location.href = 'cart.php';
+        window.location.href = 'cart.html';
     } else {
         alert('Please select a size before adding to cart.');
     }
