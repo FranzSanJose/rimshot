@@ -1,15 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    echo "<p>Please LOG IN FIRST to access Checkout. You will be redirected shortly.</p>";
-    echo "<script>
-            setTimeout(function(){
-                window.location.href = 'login.html';
-            }, 3000);
-          </script>";
-    exit();
-}
+
 
 $servername = "localhost";
 $username = "root";
