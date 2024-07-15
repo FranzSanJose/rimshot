@@ -80,7 +80,7 @@ function confirmOrder(event) {
                 window.location.href = 'home.html';
             });
         } else {
-            alert('Order could not be processed. Please try again.');
+         
         }
     })
     .catch(error => console.error('Error:', error));
