@@ -22,19 +22,24 @@ function confirmOrder(event) {
     .then(data => {
         console.log(data); // Debugging: Print server response
 
-        if (data.includes('Your order has been submitted successfully!')) {
-            // Clear cart items from localStorage
-            localStorage.removeItem('cartItems');
+        // Clear cart items from localStorage
+        localStorage.removeItem('cartItems');
 
-            // Close modal event listener
-            document.querySelector('.close').addEventListener('click', () => {
-                modal.style.display = 'none';
-                // Redirect to the homepage or any other page
-                window.location.href = 'home.html';
-            });
-        } else {
-            alert('Order could not be processed. Please try again.');
-        }
+        // Redirect to the homepage or any other page
+        window.location.href = 'home.html';
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+
+        // Redirect to the homepage or any other page even if there's an error
+        window.location.href = 'home.html';
+    });
 }
+
+// Invoke the function to display the order summary when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    displayOrderSummary();
+
+    // Add event listener for the confirm order button
+    document.getElementById('confirm-order-btn').addEventListener('click', confirmOrder);
+});
