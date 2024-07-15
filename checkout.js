@@ -13,7 +13,7 @@ function displayOrderSummary() {
         cartSubtotal += itemSubtotal;
 
         // Create item details
-        const itemDetails = 
+        const itemDetails = `
             <div class="item">
                 <p><strong>Image:</strong> <img src="${item.image}" alt="${item.name}" style="width: 70px;"></p>
                 <p><strong>Item Name:</strong> ${item.name}</p>
@@ -21,7 +21,7 @@ function displayOrderSummary() {
                 <p><strong>Quantity:</strong> ${item.quantity}</p>
                 <p><strong>Size:</strong> ${item.size}</p>
             </div>
-        ;
+        `;
 
         // Append item details to the container
         orderSummaryContainer.innerHTML += itemDetails;
@@ -31,11 +31,11 @@ function displayOrderSummary() {
     const cartTotal = cartSubtotal + shippingFee;
 
     // Create order summary details
-    const orderDetails = 
+    const orderDetails = `
         <p><strong>Subtotal:</strong> ₱${cartSubtotal.toFixed(2)}</p>
         <p><strong>Shipping:</strong> ₱${shippingFee.toFixed(2)}</p>
         <p><strong>Total:</strong> ₱${cartTotal.toFixed(2)}</p>
-    ;
+    `;
 
     // Append the order details to the container
     orderSummaryContainer.innerHTML += orderDetails;
@@ -63,7 +63,7 @@ function confirmOrder(event) {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: total=${total}&cartItems=${encodeURIComponent(JSON.stringify(cartItems))}&submit_order=1,
+        body: `total=${total}&cartItems=${encodeURIComponent(JSON.stringify(cartItems))}&submit_order=1`,
     })
     .then(response => response.text())
     .then(data => {
