@@ -11,7 +11,7 @@ function confirmOrder(event) {
     const total = document.getElementById('total').value;
 
     // Ensure image data is included
-    fetch('checkout.html', {
+    fetch('checkout.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -22,24 +22,19 @@ function confirmOrder(event) {
     .then(data => {
         console.log(data); // Debugging: Print server response
 
-        // Clear cart items from localStorage
-        localStorage.removeItem('cartItems');
+        if (data.includes('Your order has been submitted successfully!')) {
+            // Clear cart items from localStorage
+            localStorage.removeItem('cartItems');
 
-        // Redirect to the homepage or any other page
-        window.location.href = 'home.html';
+            // Close modal event listener
+            document.querySelector('.close').addEventListener('click', () => {
+                modal.style.display = 'none';
+                // Redirect to the homepage or any other page
+                window.location.href = 'home.html';
+            });
+        } else {
+            
+        }
     })
-    .catch(error => {
-        console.error('Error:', error);
-
-        // Redirect to the homepage or any other page even if there's an error
-        window.location.href = 'home.html';
-    });
+    .catch(error => console.error('Error:', error));
 }
-
-// Invoke the function to display the order summary when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    displayOrderSummary();
-
-    // Add event listener for the confirm order button
-    document.getElementById('confirm-order-btn').addEventListener('click', confirmOrder);
-});
