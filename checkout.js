@@ -11,7 +11,7 @@ function confirmOrder(event) {
     const total = document.getElementById('total').value;
 
     // Ensure image data is included
-    fetch('checkout.php', {
+    fetch('checkout.html', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
