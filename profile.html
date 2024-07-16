@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,90 +11,7 @@
 </head>
 
 <style>
-    /* Navbar styling */
-    #header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background-color: black;
-        color: white;
-    }
-
-    #navbar {
-        display: flex;
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    #navbar li {
-        margin-right: 15px;
-    }
-
-    #navbar li:last-child {
-        margin-right: 0;
-    }
-
-    #navbar li a {
-        color: white;
-        text-decoration: none;
-        padding: 10px;
-        border: 2px solid white;
-    }
-
-    #navbar li a:hover {
-        background-color: white;
-        color: black;
-        border-radius: 5px;
-    }
-
-    .logo {
-        height: 60px;
-        width: auto;
-    }
-
-    /* Hamburger menu */
-    .icon {
-        display: none;
-        color: white;
-        cursor: pointer;
-    }
-
-    @media screen and (max-width: 768px) {
-        #navbar {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            background-color: #333;
-        }
-
-        #navbar.active {
-            display: flex;
-            background-color: black
-        }
-
-        .icon {
-            display: block;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-
-        #navbar li {
-            margin-right: 0;
-            text-align: center;
-            width: 100%;
-            padding: 10px;
-        }
-    }
-
-    .hidden {
-        display: none;
-    }
+    /* Your existing CSS */
 </style>
 
 <body>
@@ -115,92 +30,100 @@
         </nav>
     </header>
 
-<section id="profile" class="profile-bg">
-    <div class="profile-container">
-        <h2>Profile</h2>
-        <div class="form-group">
-            <label for="profile-picture">Profile Picture:</label>
-            <img id="profile-picture-preview" src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture">
-        </div>
-        <div id="profile-info">
-            <p>Email: <span id="email"><?php echo htmlspecialchars($email); ?></span></p>
-            <p>Username: <span id="username"><?php echo htmlspecialchars($username); ?></span></p>
-            <p>Address: <span id="address"><?php echo htmlspecialchars($address); ?></span></p>
-            <p>Contact No: <span id="contact"><?php echo htmlspecialchars($contact); ?></span></p>
-        </div>
-        
-        <div class="Edit">
-            <button onclick="toggleEditForm()">Edit Profile</button>
-            <p></p>
-            <form id="edit-profile-form" class="hidden" onsubmit="submitProfileChanges(event)">
-                <input type="email" id="new-email" placeholder="New Email" required>
-                <br>
-                <input type="text" id="new-username" placeholder="New Username" required>
-                <br>
-                <input type="text" id="new-address" placeholder="New Address" required>
-                <br>
-                <input type="tel" id="new-contact" placeholder="New Contact No." required>
-                <br>
+    <section id="profile" class="profile-bg">
+        <div class="profile-container">
+            <h2>Profile</h2>
+            <div class="form-group">
+                <label for="profile-picture">Profile Picture:</label>
+                <img id="profile-picture-preview" src="" alt="Profile Picture">
+            </div>
+            <div id="profile-info">
+                <p>Email: <span id="email"></span></p>
+                <p>Username: <span id="username"></span></p>
+                <p>Address: <span id="address"></span></p>
+                <p>Contact No: <span id="contact"></span></p>
+            </div>
+            
+            <div class="Edit">
+                <button onclick="toggleEditForm()">Edit Profile</button>
                 <p></p>
-                <button type="submit">Save Changes</button>
-            </form>
-            <form method="post">
-                <button type="submit" name="logout">Logout</button>
-            </form>
+                <form id="edit-profile-form" class="hidden" onsubmit="submitProfileChanges(event)">
+                    <input type="email" id="new-email" placeholder="New Email" required>
+                    <br>
+                    <input type="text" id="new-username" placeholder="New Username" required>
+                    <br>
+                    <input type="text" id="new-address" placeholder="New Address" required>
+                    <br>
+                    <input type="tel" id="new-contact" placeholder="New Contact No." required>
+                    <br>
+                    <p></p>
+                    <button type="submit">Save Changes</button>
+                </form>
+                <form method="post">
+                    <button type="submit" name="logout">Logout</button>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="order-history" class="order-history-bg">
-    <div class="order-history-container">
-        <h2>Order History</h2>
-        <button onclick="toggleOrderHistory()">Toggle Order History</button>
-        <div id="order-history-content" class="hidden">
-          
+    <section id="order-history" class="order-history-bg">
+        <div class="order-history-container">
+            <h2>Order History</h2>
+            <button onclick="toggleOrderHistory()">Toggle Order History</button>
+            <div id="order-history-content" class="hidden">
                 <p>You have no orders.</p>
-       
-                    <div class="order">
-                        <h3>Order ID: </h3>
-                        <p><strong>Order Date:</strong> </p>
-                        <p><strong>Total:</strong> </p>
-                        <p><strong>Status:</strong> </p>
-                        <h4>Items:</h4>
-                       
-                            <div class="item">
-                                <img src="" alt="" style="width: 70px;">
-                                <div>
-                                    <p><strong>Item:</strong> </p>
-                                    <p><strong>Quantity:</strong> </p>
-                                    <p><strong>Size:</strong> </p>
-                                    <p><strong>Price:</strong> ₱</p>
-                                </div>
-                            </div>
-                        
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<script src="profile.js"></script>
-<script>
-    function toggleNavbar() {
-        var navbar = document.getElementById("navbar");
-        navbar.classList.toggle("active");
-    }
+    <script src="profile.js"></script>
+    <script>
+        function toggleNavbar() {
+            var navbar = document.getElementById("navbar");
+            navbar.classList.toggle("active");
+        }
 
-    function toggleOrderHistory() {
-        var orderHistoryContent = document.getElementById("order-history-content");
-        orderHistoryContent.classList.toggle("hidden");
-    }
+        function toggleOrderHistory() {
+            var orderHistoryContent = document.getElementById("order-history-content");
+            orderHistoryContent.classList.toggle("hidden");
+        }
 
-    function toggleEditForm() {
-        var editForm = document.getElementById("edit-profile-form");
-        editForm.classList.toggle("hidden");
-    }
+        function toggleEditForm() {
+            var editForm = document.getElementById("edit-profile-form");
+            editForm.classList.toggle("hidden");
+        }
 
-    function submitProfileChanges(event) {
-        event.preventDefault();
-        // Add your AJAX code here to submit the profile changes
-    }
-</script>
+        function loadProfile() {
+            var profilePicture = localStorage.getItem('profilePicture');
+            var email = localStorage.getItem('email');
+            var username = localStorage.getItem('username');
+            var address = localStorage.getItem('address');
+            var contact = localStorage.getItem('contact');
+
+            document.getElementById('profile-picture-preview').src = profilePicture ? profilePicture : 'default-profile.png';
+            document.getElementById('email').innerText = email ? email : 'N/A';
+            document.getElementById('username').innerText = username ? username : 'N/A';
+            document.getElementById('address').innerText = address ? address : 'N/A';
+            document.getElementById('contact').innerText = contact ? contact : 'N/A';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
+
+        function submitProfileChanges(event) {
+            event.preventDefault();
+            var email = document.getElementById('new-email').value;
+            var username = document.getElementById('new-username').value;
+            var address = document.getElementById('new-address').value;
+            var contact = document.getElementById('new-contact').value;
+
+            localStorage.setItem('email', email);
+            localStorage.setItem('username', username);
+            localStorage.setItem('address', address);
+            localStorage.setItem('contact', contact);
+
+            alert("Profile updated successfully!");
+            window.location.reload();
+        }
+    </script>
 </body>
 </html>
