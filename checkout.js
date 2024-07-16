@@ -1,95 +1,53 @@
-// Function to display the order summary
-function displayOrderSummary() {
-    // Retrieve cart items from localStorage
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-    // Calculate subtotal and total
-    let cartSubtotal = 0;
-    const orderSummaryContainer = document.querySelector('.order-summary');
-    orderSummaryContainer.innerHTML = ''; // Clear any existing content
-
-    cartItems.forEach(item => {
-        const itemSubtotal = item.price * item.quantity;
-        cartSubtotal += itemSubtotal;
-
-        // Create item details
-        const itemDetails = `
-            <div class="item">
-                <p><strong>Image:</strong> <img src="${item.image}" alt="${item.name}" style="width: 70px;"></p>
-                <p><strong>Item Name:</strong> ${item.name}</p>
-                <p><strong>Item ID:</strong> ${item.id}</p>
-                <p><strong>Quantity:</strong> ${item.quantity}</p>
-                <p><strong>Size:</strong> ${item.size}</p>
-            </div>
-        `;
-
-        // Append item details to the container
-        orderSummaryContainer.innerHTML += itemDetails;
-    });
-
-    const shippingFee = 38;
-    const cartTotal = cartSubtotal + shippingFee;
-
-    // Create order summary details
-    const orderDetails = `
-        <p><strong>Subtotal:</strong> ₱${cartSubtotal.toFixed(2)}</p>
-        <p><strong>Shipping:</strong> ₱${shippingFee.toFixed(2)}</p>
-        <p><strong>Total:</strong> ₱${cartTotal.toFixed(2)}</p>
-    `;
-
-    // Append the order details to the container
-    orderSummaryContainer.innerHTML += orderDetails;
-
-    // Set hidden form fields
-    document.getElementById('total').value = cartTotal;
-    document.getElementById('cartItems').value = JSON.stringify(cartItems);
-}
-
-// Function to handle order confirmation
-function confirmOrder(event) {
-    event.preventDefault();
-
-    // Display the order confirmation modal
-    const modal = document.getElementById('order-confirmation-modal');
-    modal.style.display = 'block';
-
-    // Retrieve cart items and total
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const total = document.getElementById('total').value;
-
-    // Ensure image data is included
-    fetch('checkout.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `total=${total}&cartItems=${encodeURIComponent(JSON.stringify(cartItems))}&submit_order=1`,
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data); // Debugging: Print server response
-
-        if (data.includes('Your order has been submitted successfully!')) {
-            // Clear cart items from localStorage
-            localStorage.removeItem('cartItems');
-
-            // Close modal event listener
-            document.querySelector('.close').addEventListener('click', () => {
-                modal.style.display = 'none';
-                // Redirect to the homepage or any other page
-                window.location.href = 'home.html';
-            });
-        } else {
-         
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Invoke the function to display the order summary when the page loads
 document.addEventListener('DOMContentLoaded', function() {
-    displayOrderSummary();
+    // Load user info from localStorage and display it
+    const email = localStorage.getItem('email');
+    const username = localStorage.getItem('username');
+    const address = localStorage.getItem('address');
+    const contact = localStorage.getItem('contact');
 
-    // Add event listener for the confirm order button
-    document.getElementById('confirm-order-btn').addEventListener('click', confirmOrder);
+    if (username) {
+        const userInfo = document.getElementById('user-info');
+        userInfo.innerHTML = `
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Username:</strong> ${username}</p>
+            <p><strong>Address:</strong> ${address}</p>
+            <p><strong>Contact:</strong> ${contact}</p>
+        `;
+    }
+
+    // Load cart items from localStorage and display them in order summary
+    const orderItems = JSON.parse(localStorage.getItem('cartItems'));
+    if (orderItems) {
+        const orderItemsContainer = document.getElementById('order-items');
+        let orderSubtotal = 0;
+
+        orderItems.forEach(item => {
+            const subtotal = item.price * item.quantity;
+            orderSubtotal += subtotal;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.id}</td>
+                <td><img src="${item.image}" alt="${item.name}" style="width: 130px;"></td>
+                <td>${item.name}</td>
+                <td>${item.size}</td>
+                <td>₱${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>₱${subtotal}</td>
+            `;
+            orderItemsContainer.appendChild(row);
+        });
+
+        const orderTotal = orderSubtotal + 38;
+
+        document.getElementById('order-subtotal').textContent = `₱${orderSubtotal}`;
+        document.getElementById('order-total').textContent = `₱${orderTotal}`;
+    }
 });
+
+function placeOrder() {
+    // Simulate placing an order and then clear the cart
+    alert('Order placed successfully!');
+    localStorage.removeItem('cartItems');
+    window.location.href = 'home.html';
+}
