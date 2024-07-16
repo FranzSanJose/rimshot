@@ -112,10 +112,10 @@
             <!-- Order summary will be displayed here -->
         </div>
         <form method="post" id="order-form">
-            <p><b>User Information:</b></p>
-            <p><b>Name: </b><?php echo htmlspecialchars($username); ?></p>
-            <p><b>Address: </b><?php echo htmlspecialchars($address); ?></p>
-            <p><b>Contact: </b><?php echo htmlspecialchars($contact); ?></p>
+                <p><b>Email: </b><span id="email"></span></p>
+                <p><b>Name: </b><span id="username"></span></p>
+                <p><b>Address: </b><span id="address"></span></p>
+                <p><b>Contact No: </b><span id="contact"></span></p>
             <input type="hidden" name="total" id="total" value="">
             <input type="hidden" name="cartItems" id="cartItems" value="">
             <button type="submit" name="submit_order" id="confirm-order-btn">Confirm Order</button>
