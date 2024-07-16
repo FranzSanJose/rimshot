@@ -114,6 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function placeOrder() {
     // Simulate placing an order and then clear the cart
     alert('Order placed successfully!');
-    localStorage.removeItem('cartItems');
+    
     window.location.href = 'home.html';
 }
