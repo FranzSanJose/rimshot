@@ -95,6 +95,22 @@
     .hidden {
         display: none;
     }
+
+        .logout-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #f44336; /* Red color, you can change this */
+        color: white;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .logout-button:hover {
+        background-color: #d32f2f; /* Darker red on hover */
+    }
 </style>
 
 <body>
@@ -144,9 +160,7 @@
                     <p></p>
                     <button type="submit">Save Changes</button>
                 </form>
-                <form method="post">
-                    <button type="submit" name="logout">Logout</button>
-                </form>
+               <a href="login.html" class="logout-button">Logout</a>
             </div>
         </div>
     </section>
