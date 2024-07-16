@@ -21,7 +21,7 @@ function renderCartItems() {
         return;
     } else {
         proceedButton.classList.remove('disabled');
-        proceedButton.href = 'checkout.html';
+        proceedButton.href = 'checkout.php';
     }
 
     cartItems.forEach(item => {
@@ -50,6 +50,7 @@ function renderCartItems() {
     // Store the updated cartItems in localStorage
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
+
 
 document.addEventListener('change', function(event) {
     if (event.target.classList.contains('item-quantity')) {
@@ -86,21 +87,16 @@ document.addEventListener('DOMContentLoaded', function() {
         cartItems = storedItems;
         renderCartItems();
     }
-
-    // Load user info from localStorage and display it
-    const email = localStorage.getItem('email');
-    const username = localStorage.getItem('username');
-    const address = localStorage.getItem('address');
-    const contact = localStorage.getItem('contact');
-
-    if (username) {
-        const userInfo = document.createElement('div');
-        userInfo.innerHTML = `
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Username:</strong> ${username}</p>
-            <p><strong>Address:</strong> ${address}</p>
-            <p><strong>Contact:</strong> ${contact}</p>
-        `;
-        document.getElementById('cart').appendChild(userInfo);
-    }
 });
+
+
+function checkoutClicked() {
+    // Clear cartItems from localStorage
+    localStorage.removeItem('cartItems');
+    // Reset cartItems array
+    cartItems = [];
+    // Render empty cart
+    renderCartItems();
+    // Optionally, redirect to checkout.php
+    window.location.href = 'checkout.php';
+}
