@@ -135,7 +135,7 @@
         </nav>
     </header>
 
-     <section id="checkout">
+    <section id="checkout">
     <div class="checkout-container">
         <h2>Checkout</h2>
         <div class="order-summary">
@@ -153,52 +153,14 @@
     </div>
 
     <!-- Modal for order confirmation -->
-    <div id="order-confirmation-modal" class="modal" style="display:none;">
+    <div id="order-confirmation-modal" class="modal">
         <div class="modal-content">
+            <span class="close">&times;</span>
             <h2>Order Confirmation</h2>
             <p>Your order has been confirmed!</p>
         </div>
     </div>
 
     <script src="checkout.js"></script>
-    <script>
-        document.getElementById('order-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            var total = document.getElementById('total').value;
-            var cartItems = document.getElementById('cartItems').value;
-
-            fetch('checkout.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `total=${total}&cartItems=${encodeURIComponent(JSON.stringify(cartItems))}&submit_order=1`,
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data); // Debugging: Print server response
-
-                if (data.includes('Your order has been submitted successfully!')) {
-                    // Show modal for order confirmation
-                    document.getElementById('order-confirmation-modal').style.display = 'block';
-
-                    // Clear cart items from localStorage
-                    localStorage.removeItem('cartItems');
-
-                    // Redirect to home.html after 2 seconds
-                    setTimeout(function() {
-                        window.location.href = 'home.html';
-                    }, 2000); // 2 seconds delay
-                } else {
-                    alert('There was an issue with your order.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an issue with your order.');
-            });
-        });
-    </script>
 </body>
 </html>
