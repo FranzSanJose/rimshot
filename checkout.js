@@ -1,21 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Load user info from localStorage and display it
-    const email = localStorage.getItem('email');
-    const username = localStorage.getItem('username');
-    const address = localStorage.getItem('address');
-    const contact = localStorage.getItem('contact');
-
-    if (username) {
-        const userInfo = document.getElementById('user-info');
-        userInfo.innerHTML = `
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Username:</strong> ${username}</p>
-            <p><strong>Address:</strong> ${address}</p>
-            <p><strong>Contact:</strong> ${contact}</p>
-        `;
-    }
-
-   // Function to display the order summary
+// Function to display the order summary
 function displayOrderSummary() {
     // Retrieve cart items from localStorage
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
