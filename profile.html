@@ -156,30 +156,26 @@
         <h2>Order History</h2>
         <button onclick="toggleOrderHistory()">Toggle Order History</button>
         <div id="order-history-content" class="hidden">
-            <?php if (empty($orders)): ?>
+          
                 <p>You have no orders.</p>
-            <?php else: ?>
-                <?php foreach ($orders as $order_id => $order): ?>
+       
                     <div class="order">
-                        <h3>Order ID: <?php echo $order_id; ?></h3>
-                        <p><strong>Order Date:</strong> <?php echo $order['created_at']; ?></p>
-                        <p><strong>Total:</strong> ₱<?php echo number_format($order['total'], 2); ?></p>
-                        <p><strong>Status:</strong> <?php echo htmlspecialchars($order['status']); ?></p>
+                        <h3>Order ID: </h3>
+                        <p><strong>Order Date:</strong> </p>
+                        <p><strong>Total:</strong> </p>
+                        <p><strong>Status:</strong> </p>
                         <h4>Items:</h4>
-                        <?php foreach ($order['items'] as $item): ?>
+                       
                             <div class="item">
                                 <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" style="width: 70px;">
                                 <div>
-                                    <p><strong>Item:</strong> <?php echo htmlspecialchars($item['name']); ?></p>
-                                    <p><strong>Quantity:</strong> <?php echo $item['quantity']; ?></p>
-                                    <p><strong>Size:</strong> <?php echo htmlspecialchars($item['size']); ?></p>
-                                    <p><strong>Price:</strong> ₱<?php echo number_format($item['price'], 2); ?></p>
+                                    <p><strong>Item:</strong> </p>
+                                    <p><strong>Quantity:</strong> </p>
+                                    <p><strong>Size:</strong> </p>
+                                    <p><strong>Price:</strong> ₱</p>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
+                        
         </div>
     </div>
 </section>
