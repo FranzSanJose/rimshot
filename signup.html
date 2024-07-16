@@ -188,63 +188,83 @@
 </head>
 <body>
     <header id="header">
-        <a><img src="logo.png" class="logo" alt="Logo"></a>
+        <a href="home.html"><img src="logo.png" class="logo" alt="Logo"></a>
+        <i class="fa fa-bars icon" onclick="toggleNavbar()"></i>
         <nav>
-            <ul id="navbar"></ul>
+            <ul id="navbar">
+                <li><a href="home.html"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+                <li><a href="shop.html"><i class="fa-solid fa-store"></i> Shop</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-shopping-cart"></i> Cart</a></li>
+            </ul>
         </nav>
     </header>
+
     <section id="signup" class="signup-bg">
         <div class="signup-container">
             <h2>Sign Up</h2>
-            <form id="signup-form">
+            <form id="signup-form" onsubmit="handleSignup(event)">
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" required>
                 </div>
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <input type="text" id="username" required>
                 </div>
                 <div class="form-group">
                     <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" placeholder="Address" required>
+                    <input type="text" id="address" required>
                 </div>
                 <div class="form-group">
                     <label for="contact">Contact No:</label>
-                    <input type="tel" id="contact" name="contact" placeholder="Contact No." required>
+                    <input type="tel" id="contact" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <label for="profile-picture">Profile Picture:</label>
+                    <input type="file" id="profile-picture" accept="image/*" onchange="previewSignupProfilePicture(event)" required>
+                    <img id="profile-picture-preview" src="" alt="Profile Picture Preview" style="max-width: 150px;">
                 </div>
-                <div class="form-group">
-                    <button type="submit" id="signup-btn">Sign Up</button>
-                </div>
+                <button type="submit">Sign Up</button>
             </form>
-            <div class="form-group">
-                <p>Already have an account? <a href="login.html">Log In</a></p>
-            </div>
         </div>
     </section>
 
     <script>
-        document.getElementById('signup-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
-            var email = document.getElementById('email').value;
-            var username = document.getElementById('username').value;
-            var address = document.getElementById('address').value;
-            var contact = document.getElementById('contact').value;
-            var password = document.getElementById('password').value;
+        function toggleNavbar() {
+            var navbar = document.getElementById("navbar");
+            navbar.classList.toggle("active");
+        }
+
+        function previewSignupProfilePicture(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('profile-picture-preview');
+                output.src = reader.result;
+                localStorage.setItem('signupProfilePicture', reader.result);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const address = document.getElementById('address').value;
+            const contact = document.getElementById('contact').value;
+            const profilePicture = localStorage.getItem('signupProfilePicture');
 
             localStorage.setItem('email', email);
             localStorage.setItem('username', username);
             localStorage.setItem('address', address);
             localStorage.setItem('contact', contact);
-            localStorage.setItem('password', password);
+            localStorage.setItem('profilePicture', profilePicture);
 
-            alert('Signup successful!');
-            window.location.href = 'login.html';
-        });
+            alert("Signup successful!");
+            window.location.href = 'profile.html';
+        }
     </script>
 </body>
 </html>
