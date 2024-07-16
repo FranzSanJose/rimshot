@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load cart items from localStorage and display them in order summary
     const orderItems = JSON.parse(localStorage.getItem('cartItems'));
-    if (orderItems) {
+    if (orderItems && orderItems.length > 0) {
         const orderItemsContainer = document.getElementById('order-items');
         let orderSubtotal = 0;
 
@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('order-subtotal').textContent = `₱${orderSubtotal}`;
         document.getElementById('order-total').textContent = `₱${orderTotal}`;
+    } else {
+        // If no items in cart, show empty cart message
+        document.getElementById('order-items').innerHTML = '<tr><td colspan="7">Your cart is empty.</td></tr>';
+        document.querySelector('button.normal').disabled = true;  // Disable the place order button
     }
 });
 
