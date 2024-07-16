@@ -50,7 +50,11 @@ function displayOrderSummary() {
 function confirmOrder(event) {
     event.preventDefault();
 
-// Retrieve cart items and total
+    // Display the order confirmation modal
+    const modal = document.getElementById('order-confirmation-modal');
+    modal.style.display = 'block';
+
+    // Retrieve cart items and total
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     const total = document.getElementById('total').value;
 
@@ -70,11 +74,26 @@ function confirmOrder(event) {
             // Clear cart items from localStorage
             localStorage.removeItem('cartItems');
 
+            // Close modal event listener
+            document.querySelector('.close').addEventListener('click', () => {
+                modal.style.display = 'none';
+                // Redirect to the homepage or any other page
+                window.location.href = 'home.html';
+            });
+        } else {
+            alert('Order could not be processed. Please try again.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 // Invoke the function to display the order summary when the page loads
 document.addEventListener('DOMContentLoaded', function() {
     displayOrderSummary();
 
+    // Add event listener for the confirm order button
+    document.getElementById('confirm-order-btn').addEventListener('click', confirmOrder);
+});
     
     function loadProfile() {
             
