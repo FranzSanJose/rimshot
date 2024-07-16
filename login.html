@@ -114,7 +114,7 @@
                 <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
             <div class="form-group">
-              <a href="home.html">  <button id="login-btn">Log In</button></a>
+                <button type="submit" id="login-btn">Log In</button>
             </div>
         </form>
         <div class="form-group">
@@ -122,6 +122,15 @@
         </div>
     </div>
 </section>
+
+<script>
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+    // Perform form validation or other actions here if needed
+    window.location.href = 'home.html'; // Redirect to home.html
+});
+</script>
+
 </body>
 </html>
 
