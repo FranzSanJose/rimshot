@@ -18,3 +18,13 @@ function submitProfileChanges(event) {
     alert("Profile updated successfully!");
     window.location.reload();
 }
+
+function previewProfilePicture(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const output = document.getElementById('profile-picture-preview');
+        output.src = reader.result;
+        localStorage.setItem('profilePicture', reader.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
