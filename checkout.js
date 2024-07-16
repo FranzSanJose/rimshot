@@ -15,39 +15,52 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 
-    // Load cart items from localStorage and display them in order summary
-    const orderItems = JSON.parse(localStorage.getItem('cartItems'));
-    if (orderItems && orderItems.length > 0) {
-        const orderItemsContainer = document.getElementById('order-items');
-        let orderSubtotal = 0;
+    // Function to display the order summary
+function displayOrderSummary() {
+    // Retrieve cart items from localStorage
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-        orderItems.forEach(item => {
-            const subtotal = item.price * item.quantity;
-            orderSubtotal += subtotal;
+    // Calculate subtotal and total
+    let cartSubtotal = 0;
+    const orderSummaryContainer = document.querySelector('.order-summary');
+    orderSummaryContainer.innerHTML = ''; // Clear any existing content
 
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.id}</td>
-                <td><img src="${item.image}" alt="${item.name}" style="width: 130px;"></td>
-                <td>${item.name}</td>
-                <td>${item.size}</td>
-                <td>₱${item.price}</td>
-                <td>${item.quantity}</td>
-                <td>₱${subtotal}</td>
-            `;
-            orderItemsContainer.appendChild(row);
-        });
+    cartItems.forEach(item => {
+        const itemSubtotal = item.price * item.quantity;
+        cartSubtotal += itemSubtotal;
 
-        const orderTotal = orderSubtotal + 38;
+        // Create item details
+        const itemDetails = `
+            <div class="item">
+                <p><strong>Image:</strong> <img src="${item.image}" alt="${item.name}" style="width: 70px;"></p>
+                <p><strong>Item Name:</strong> ${item.name}</p>
+                <p><strong>Item ID:</strong> ${item.id}</p>
+                <p><strong>Quantity:</strong> ${item.quantity}</p>
+                <p><strong>Size:</strong> ${item.size}</p>
+            </div>
+        `;
 
-        document.getElementById('order-subtotal').textContent = `₱${orderSubtotal}`;
-        document.getElementById('order-total').textContent = `₱${orderTotal}`;
-    } else {
-        // If no items in cart, show empty cart message
-        document.getElementById('order-items').innerHTML = '<tr><td colspan="7">Your cart is empty.</td></tr>';
-        document.querySelector('button.normal').disabled = true;  // Disable the place order button
-    }
-});
+        // Append item details to the container
+        orderSummaryContainer.innerHTML += itemDetails;
+    });
+
+    const shippingFee = 38;
+    const cartTotal = cartSubtotal + shippingFee;
+
+    // Create order summary details
+    const orderDetails = `
+        <p><strong>Subtotal:</strong> ₱${cartSubtotal.toFixed(2)}</p>
+        <p><strong>Shipping:</strong> ₱${shippingFee.toFixed(2)}</p>
+        <p><strong>Total:</strong> ₱${cartTotal.toFixed(2)}</p>
+    `;
+
+    // Append the order details to the container
+    orderSummaryContainer.innerHTML += orderDetails;
+
+    // Set hidden form fields
+    document.getElementById('total').value = cartTotal;
+    document.getElementById('cartItems').value = JSON.stringify(cartItems);
+}
 
 function placeOrder() {
     // Simulate placing an order and then clear the cart
