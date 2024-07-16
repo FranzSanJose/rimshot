@@ -90,17 +90,32 @@
                 width: 100%;
             }
         }
-        button.normal {
+        button.normal-btn {
     font-size: 14px;
     font-weight: 600;
     padding: 15px 30px;
-    color: #000;
-    background-color: #fff;
+    color: white;
+    background-color: black;
     border-radius: 5px;
     cursor: pointer;
     border: none;
     outline: none;
     transition: 0.5s;
+    border: 2px solid black;
+
+}
+              button.normal-btn:hover {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 30px;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.5s;
+    border: 2px solid black;
 
 }
     </style>
@@ -134,7 +149,7 @@
             </div>
             <input type="hidden" name="total" id="total" value="">
             <input type="hidden" name="cartItems" id="cartItems" value="">
-            <button class="normal" onclick="placeOrder()">Confirm Order</button>
+            <button class="normal-btn" onclick="placeOrder()">Confirm Order</button>
         </form>
     </div>
 
