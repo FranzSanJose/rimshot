@@ -98,5 +98,5 @@ function checkoutClicked() {
     // Render empty cart
     renderCartItems();
     // Optionally, redirect to checkout.php
-    window.location.href = 'checkout.php';
+    window.location.href = 'checkout.html';
 }
