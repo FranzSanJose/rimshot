@@ -10,17 +10,11 @@ function submitProfileChanges(event) {
     const address = document.getElementById('new-address').value;
     const contact = document.getElementById('new-contact').value;
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "edit_profile.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            alert("Profile updated successfully!");
-            window.location.reload();
-        }
-    };
-    xhr.send("email=" + encodeURIComponent(email) +
-             "&username=" + encodeURIComponent(username) +
-             "&address=" + encodeURIComponent(address) +
-             "&contact=" + encodeURIComponent(contact));
+    localStorage.setItem('email', email);
+    localStorage.setItem('username', username);
+    localStorage.setItem('address', address);
+    localStorage.setItem('contact', contact);
+
+    alert("Profile updated successfully!");
+    window.location.reload();
 }
