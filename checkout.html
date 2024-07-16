@@ -112,10 +112,12 @@
             <!-- Order summary will be displayed here -->
         </div>
         <form method="post" id="order-form">
+              <div id="profile-info">
                 <p><b>Email: </b><span id="email"></span></p>
                 <p><b>Name: </b><span id="username"></span></p>
                 <p><b>Address: </b><span id="address"></span></p>
                 <p><b>Contact No: </b><span id="contact"></span></p>
+            </div>
             <input type="hidden" name="total" id="total" value="">
             <input type="hidden" name="cartItems" id="cartItems" value="">
             <button type="submit" name="submit_order" id="confirm-order-btn">Confirm Order</button>
