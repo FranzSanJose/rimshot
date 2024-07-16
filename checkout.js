@@ -109,3 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         document.addEventListener('DOMContentLoaded', loadProfile);
+
+function placeOrder() {
+    // Simulate placing an order and then clear the cart
+    alert('Order placed successfully!');
+    localStorage.removeItem('cartItems');
+    window.location.href = 'home.html';
+}
