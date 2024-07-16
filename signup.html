@@ -197,90 +197,75 @@
         </nav>
     </header>
     
-    <section id="signup">
-        <div class="signup-container clearfix">
-            <h2>Create an Account</h2>
-            <form id="signup-form" action="signup.php" method="POST" enctype="multipart/form-data" onsubmit="redirectToLogin(event)">
-                <div class="form-group">
-                    <label for="profile-picture">Upload Profile Picture:</label>
-                    <div>
-                        <img id="profile-picture-preview" src="#" alt="">
-                        <input type="file" id="profile-picture" name="profile-picture" accept="image/*" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Email" required>
-                        <div id="email-error" class="error-message"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" placeholder="Username" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="address">Address:</label>
-                        <input type="text" id="address" name="address" placeholder="Address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact">Contact No:</label>
-                        <input type="tel" id="contact" name="contact" placeholder="Contact No." value="09" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Password" required oninput="checkPasswordStrength()">
-                        <div id="password-strength" class="password-strength"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm-password">Confirm Password:</label>
-                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" id="signup-btn">Sign Up</button>
-                </div>
-            </form>
+<section id="signup">
+    <div class="signup-container clearfix">
+        <h2>Create an Account</h2>
+        <form id="signup-form" onsubmit="redirectToLogin(event)">
             <div class="form-group">
-                <p>Already have an account? <a href="login.html">Log In</a></p>
+                <label for="profile-picture">Upload Profile Picture:</label>
+                <div>
+                    <img id="profile-picture-preview" src="#" alt="">
+                    <input type="file" id="profile-picture" name="profile-picture" accept="image/*" required>
+                </div>
             </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <div id="email-error" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" placeholder="Address" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact No:</label>
+                    <input type="tel" id="contact" name="contact" placeholder="Contact No." value="09" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <div id="password-strength" class="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="signup-btn">Sign Up</button>
+            </div>
+        </form>
+        <div class="form-group">
+            <p>Already have an account? <a href="login.html">Log In</a></p>
         </div>
-    </section>
-
-    <!-- Popup for successful signup -->
-    <div id="signup-success" class="popup">
-        <p>Signup successful!</p>
     </div>
-    
-    <script src="signup.js"></script>
-    <script>
-        function redirectToLogin(event) {
-            event.preventDefault();
-            var form = event.target;
-            var formData = new FormData(form);
+</section>
 
-            fetch(form.action, {
-                method: form.method,
-                body: formData
-            }).then(response => {
-                if (response.ok) {
-                    // Show popup for successful signup
-                    document.getElementById('signup-success').style.display = 'block';
-                    // Redirect after a short delay
-                    setTimeout(function() {
-                        window.location.href = 'login.html';
-                    }, 2000); // 2 seconds delay
-                } else {
-                    alert('There was an issue with your sign-up.');
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-                alert('There was an issue with your sign-up.');
-            });
-        }
-    </script>
+<!-- Popup for successful signup -->
+<div id="signup-success" class="popup" style="display:none;">
+    <p>Signup successful!</p>
+</div>
+
+<script>
+    function redirectToLogin(event) {
+        event.preventDefault();
+        // Show popup for successful signup
+        document.getElementById('signup-success').style.display = 'block';
+        // Redirect after a short delay
+        setTimeout(function() {
+            window.location.href = 'login.html';
+        }, 2000); // 2 seconds delay
+    }
+</script>
+
 </body>
 </html>
