@@ -50,10 +50,7 @@ function displayOrderSummary() {
 document.addEventListener('DOMContentLoaded', function() {
     displayOrderSummary();
 
-    // Add event listener for the confirm order button
-    document.getElementById('confirm-order-btn').addEventListener('click', confirmOrder);
-});
-
+    
     function loadProfile() {
             
             var email = localStorage.getItem('email');
