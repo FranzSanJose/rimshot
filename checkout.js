@@ -93,3 +93,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listener for the confirm order button
     document.getElementById('confirm-order-btn').addEventListener('click', confirmOrder);
 });
+
+    function loadProfile() {
+            
+            var email = localStorage.getItem('email');
+            var username = localStorage.getItem('username');
+            var address = localStorage.getItem('address');
+            var contact = localStorage.getItem('contact');
+
+            
+            document.getElementById('email').innerText = email ? email : 'N/A';
+            document.getElementById('username').innerText = username ? username : 'N/A';
+            document.getElementById('address').innerText = address ? address : 'N/A';
+            document.getElementById('contact').innerText = contact ? contact : 'N/A';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
