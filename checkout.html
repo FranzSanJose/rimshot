@@ -124,43 +124,72 @@
 }
 </style>
 <body>
-    <!-- Header -->
     <header id="header">
         <a href="home.html"><img src="logo.png" class="logo" alt="Logo"></a>
-       
+        <i class="fa fa-bars icon" onclick="toggleNavbar()"></i>
         <nav>
             <ul id="navbar">
-             
+                <li><a href="home.html"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+                <li><a href="shop.html"><i class="fa-solid fa-store"></i> Shop</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-shopping-cart"></i> Cart</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="checkout">
-    <div class="checkout-container">
-        <h2>Checkout</h2>
-        <div class="order-summary">
-            <!-- Order summary will be displayed here -->
+    <section id="checkout" class="section-p1">
+        <h1>Checkout</h1>
+        <div id="user-info">
+            <!-- User information will be dynamically added here -->
         </div>
-        <form method="post" id="order-form">
-            <p><b>User Information:</b></p>
-            <p><b>Name: </b><?php echo htmlspecialchars($username); ?></p>
-            <p><b>Address: </b><?php echo htmlspecialchars($address); ?></p>
-            <p><b>Contact: </b><?php echo htmlspecialchars($contact); ?></p>
-            <input type="hidden" name="total" id="total" value="">
-            <input type="hidden" name="cartItems" id="cartItems" value="">
-            <button type="submit" name="submit_order" id="confirm-order-btn">Confirm Order</button>
-        </form>
-    </div>
+        <div id="order-summary" class="section-p1">
+            <h3>Order Summary</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Size</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="order-items">
+                    <!-- Order items will be dynamically added here -->
+                </tbody>
+            </table>
+            <table>
+                <tr>
+                    <td>Order Subtotal</td>
+                    <td id="order-subtotal">₱0</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td id="order-shipping">₱38</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td id="order-total"><strong>₱0</strong></td>
+                </tr>
+            </table>
+            <button class="normal" onclick="placeOrder()">Place Order</button>
+        </div>
+    </section>
 
-    <!-- Modal for order confirmation -->
-    <div id="order-confirmation-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Order Confirmation</h2>
-            <p>Your order has been confirmed!</p>
-        </div>
-    </div>
+    <footer>
+        <!-- Your footer content here -->
+    </footer>
 
     <script src="checkout.js"></script>
+    <script>
+        function toggleNavbar() {
+            var navbar = document.getElementById("navbar");
+            navbar.classList.toggle("active");
+        }
+    </script>
 </body>
 </html>
