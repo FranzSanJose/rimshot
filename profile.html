@@ -118,7 +118,8 @@
             <h2>Profile</h2>
             <div class="form-group">
                 <label for="profile-picture">Profile Picture:</label>
-                <img id="profile-picture-preview" src="" alt="Profile Picture">
+                <img id="profile-picture-preview" src="" alt="Profile Picture" style="max-width: 150px;">
+                <input type="file" id="profile-picture-input" accept="image/*" onchange="previewProfilePicture(event)">
             </div>
             <div id="profile-info">
                 <p>Email: <span id="email"></span></p>
@@ -206,6 +207,16 @@
 
             alert("Profile updated successfully!");
             window.location.reload();
+        }
+
+        function previewProfilePicture(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('profile-picture-preview');
+                output.src = reader.result;
+                localStorage.setItem('profilePicture', reader.result);
+            };
+            reader.readAsDataURL(event.target.files[0]);
         }
     </script>
 </body>
