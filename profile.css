@@ -208,7 +208,7 @@ body {
 
 
   #profile {
-    padding: 40px 80px;
+   padding: 40px 80px;
     background-image: url(background.png);
     height: 100vh;
     background-size: cover;
@@ -217,9 +217,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    align-content: center;
+    background-attachment: fixed;
     justify-content: center;
-    background-attachment: fixed
+    align-content: flex-start;
+    align-items: flex-start;
 }
 
 #order-history {
