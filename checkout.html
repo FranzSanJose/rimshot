@@ -133,26 +133,44 @@
         </nav>
     </header>
 
-    <section id="checkout">
-    <div class="checkout-container">
-        <h2>Checkout</h2>
-        <div class="order-summary">
-            <!-- Order summary will be displayed here -->
-        </div>
-        <form method="post" id="order-form">
-              <div id="profile-info">
-                <h2><b>User Information:</b></h2>
-                <p><b>Email: </b><span id="email"></span></p>
-                <p><b>Name: </b><span id="username"></span></p>
-                <p><b>Address: </b><span id="address"></span></p>
-                <p><b>Contact No: </b><span id="contact"></span></p>
-            </div>
-            <input type="hidden" name="total" id="total" value="">
-            <input type="hidden" name="cartItems" id="cartItems" value="">
-            <button class="normal-btn" onclick="placeOrder()">Confirm Order</button>
-        </form>
-    </div>
+    <section id="checkout" class="section-p1">
+        <table width="100%" id="checkout-table" class="section-p1">
+            <thead>
+                <tr>
+                    <th>Item ID</th>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </tbody>
+        </table>
 
+        <div id="subtotal" class="section-p1">
+            <h3>Order Totals</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td id="cart-subtotal">₱0</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td id="cart-shipping">₱38</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td id="cart-total"><strong>₱0</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <button onclick="checkoutClicked()">Confirm Order</button>
+    </section>
 
     <script src="checkout.js"></script>
 </body>
