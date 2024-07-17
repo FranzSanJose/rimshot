@@ -57,7 +57,7 @@ function loadOrderHistory() {
             <p><strong>Order ID:</strong> ${order.id}</p>
             <p><strong>Date:</strong> ${order.date}</p>
             <p><strong>Total:</strong> ₱${order.total}</p>
-            <p><strong>Status:</strong> ${order.status}</p>
+            <p><strong>Status:</strong>  ${order.status ? order.status : 'Pending'}</p>
             <div class="order-items">
                 ${order.items.map(item => `
                     <div class="item">
