@@ -57,6 +57,7 @@ function loadOrderHistory() {
             <p><strong>Order ID:</strong> ${order.id}</p>
             <p><strong>Date:</strong> ${order.date}</p>
             <p><strong>Total:</strong> ₱${order.total}</p>
+            <p><strong>Status:</strong> ${order.status}</p>
             <div class="order-items">
                 ${order.items.map(item => `
                     <div class="item">
@@ -68,11 +69,6 @@ function loadOrderHistory() {
             </div>
         </div>
     `).join('');
-}
-
-function toggleOrderHistory() {
-    const orderHistoryContent = document.getElementById('order-history-content');
-    orderHistoryContent.classList.toggle('hidden');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
