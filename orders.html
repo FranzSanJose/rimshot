@@ -53,6 +53,10 @@
     `).join('');
 }
 
+        document.addEventListener('DOMContentLoaded', function() {
+    loadProfile();
+    loadOrderHistory();
+});
         
         // Display orders on the page
         async function displayOrders() {
