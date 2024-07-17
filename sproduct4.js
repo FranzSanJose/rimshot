@@ -26,7 +26,7 @@ document.getElementById('add-to-cart-btn').addEventListener('click', function() 
 
         var product = {
             id: productId, // Unique ID for the product based on size
-            name: 'Micahel Jordan Rimshot',
+            name: 'Michael Jordan Rimshot',
             image: 'product4.png',
             price: 500,
             size: selectedSize,
