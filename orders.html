@@ -24,6 +24,36 @@
             }
         }
 
+
+        function loadOrderHistory() {
+    const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+    const orderHistoryContent = document.getElementById('order-history-content');
+
+    if (orderHistory.length === 0) {
+        orderHistoryContent.innerHTML = '<p>You have no orders.</p>';
+        return;
+    }
+
+    orderHistoryContent.innerHTML = orderHistory.map(order => `
+        <div class="order">
+            <p><strong>Order ID:</strong> ${order.id}</p>
+            <p><strong>Date:</strong> ${order.date}</p>
+            <p><strong>Total:</strong> ₱${order.total}</p>
+            <p><strong>Status:</strong>  ${order.status ? order.status : 'Pending'}</p>
+            <div class="order-items">
+                ${order.items.map(item => `
+                    <div class="item">
+                        <p><strong>Item Name:</strong> ${item.name}</p>
+                        <p><strong>Quantity:</strong> ${item.quantity}</p>
+                        <p><strong>Size:</strong> ${item.size}</p>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
+        
         // Display orders on the page
         async function displayOrders() {
             const orders = await fetchOrders();
