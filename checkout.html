@@ -169,7 +169,15 @@
             </table>
         </div>
 
-        <button onclick="checkoutClicked()">Confirm Order</button>
+        <div id="profile-info">
+            <h2><b>User Information:</b></h2>
+            <p><b>Email: </b><span id="email"></span></p>
+            <p><b>Name: </b><span id="username"></span></p>
+            <p><b>Address: </b><span id="address"></span></p>
+            <p><b>Contact No: </b><span id="contact"></span></p>
+        </div>
+
+        <button onclick="placeOrder()">Place Order</button>
     </section>
 
     <script src="checkout.js"></script>
