@@ -70,6 +70,11 @@ function loadOrderHistory() {
     `).join('');
 }
 
+function toggleOrderHistory() {
+    const orderHistoryContent = document.getElementById('order-history-content');
+    orderHistoryContent.classList.toggle('hidden');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     loadProfile();
     loadOrderHistory();
