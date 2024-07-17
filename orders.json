@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "user": "John Doe",
+        "orderDate": "2024-07-16",
+        "total": 1500,
+        "address": "123 Main St",
+        "contact": "09123456789",
+        "status": "pending",
+        "items": [
+            { "name": "Item 1", "quantity": 2, "size": "M", "price": 500 }
+        ]
+    }
+]
