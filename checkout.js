@@ -71,7 +71,36 @@ function checkoutClicked() {
 }
 
 function placeOrder() {
+    // Retrieve current cart items
+    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    const cartSubtotal = cartItems.reduce((subtotal, item) => subtotal + item.price * item.quantity, 0);
+    const cartTotal = cartSubtotal + 38;
+
+    // Create an order object
+    const order = {
+        id: generateUniqueId(),
+        date: new Date().toLocaleDateString(),
+        total: cartTotal,
+        items: cartItems
+    };
+
+    // Retrieve existing order history from localStorage
+    const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+
+    // Add the new order to the order history
+    orderHistory.push(order);
+
+    // Store the updated order history in localStorage
+    localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+
+    // Clear cart items from localStorage
+    localStorage.removeItem('cartItems');
+
     // Simulate placing an order and then clear the cart
     alert('Order placed successfully!');
     window.location.href = 'home.html';
+}
+
+function generateUniqueId() {
+    return '_' + Math.random().toString(36).substr(2, 9);
 }
