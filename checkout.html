@@ -118,6 +118,25 @@
     border: 2px solid black;
 
 }
+
+        .confirm-order-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+    display: inline-block;
+    margin: 10px 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.confirm-order-button:hover {
+    background-color: white;
+    color: black;
+}
     </style>
 </head>
 
@@ -177,7 +196,7 @@
             <p><b>Contact No: </b><span id="contact"></span></p>
         </div>
 
-        <button onclick="placeOrder()">Confirm Order</button>
+        <button class="confirm-order-button" onclick="placeOrder()">Confirm Order</button>
     </section>
     <script src="checkout.js"></script>
 </body>
