@@ -196,6 +196,18 @@
             <p><b>Contact No: </b><span id="contact"></span></p>
         </div>
 
+<!-- Payment Method Selection -->
+            <p><b>Select Payment Method:</b></p>
+            <label>
+                <input type="radio" name="payment_method" value="Cash on Delivery" required> Cash on Delivery
+            </label><br>
+            <label>
+                <input type="radio" name="payment_method" value="GCASH" required> GCASH
+            </label><br>
+            <label>
+                <input type="radio" name="payment_method" value="MAYA" required> MAYA
+            </label><br>
+
         <button class="confirm-order-button" onclick="placeOrder()">Confirm Order</button>
     </section>
     <script src="checkout.js"></script>
